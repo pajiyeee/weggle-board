@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "format": "prettier --write --cache ."
+    "format": "prettier --write --cache .",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.6.1",
@@ -20,9 +21,13 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "framer-motion": "^10.12.10",
+    "next": "^13.4.1",
     "prettier": "^2.8.8",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-feather": "^2.0.10",
+    "react-router-dom": "^6.11.1",
+    "recoil": "^0.7.7"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
@@ -36,5 +41,11 @@
     "husky": "^8.0.3",
     "typescript": "^5.0.2",
     "vite": "^4.3.2"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js}": [
+      "eslint --max-warnings 0",
+      "git add"
+    ]
   }
 }

@@ -5,10 +5,11 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "typeRoots": ["./@types", "./node_modules/@types"],
 
     /* Bundler mode */
     "moduleResolution": "node",
-    // "allowImportingTsExtensions": true,
+    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
@@ -20,7 +21,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  // "include": ["src"],
-  "include": ["src", "next-env.d.ts", "**/*.ts", "**/*.tsx", "../../**/*.d.ts"],
+  "include": ["src"],
+  // "include": ["src", "next-env.d.ts", "**/*.ts", "**/*.tsx", "../../**/*.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
