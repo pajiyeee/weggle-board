@@ -3,12 +3,12 @@ import styled from '@emotion/styled';
 import { Center, Heading } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { list } from '../recoil/list';
+import { listState } from '../recoil/listState';
 import { generateId } from '../utils/generateId';
 
 const BoardDetail = () => {
   const navigate = useNavigate();
-  const [boardList, setBoardList] = useRecoilState(list);
+  const [boardList, setBoardList] = useRecoilState(listState);
   const [titleInput, setTitleInput] = useState('');
   const [textInput, setTextInput] = useState('');
 

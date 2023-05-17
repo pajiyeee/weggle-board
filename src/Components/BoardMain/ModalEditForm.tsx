@@ -2,7 +2,7 @@ import { useState, Dispatch, SetStateAction, ChangeEvent } from 'react';
 import { Heading } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import { useRecoilState } from 'recoil';
-import { list } from '../recoil/list';
+import { listState } from '../../recoil/listState';
 
 type Props = {
   item: {
@@ -16,7 +16,7 @@ type Props = {
 };
 
 const ModalEditForm = ({ item, isModalOpen, setIsModalOpen }: Props) => {
-  const [, setBoardList] = useRecoilState(list);
+  const [, setBoardList] = useRecoilState(listState);
   const [editTitleInput, setEditTitleInput] = useState<string>(item.titleValue);
   const [editTextInput, setEditTextInput] = useState<string>(item.textValue);
 

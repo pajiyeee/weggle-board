@@ -2,8 +2,8 @@ import { useState } from 'react';
 import styled from '@emotion/styled';
 import { Edit, Trash } from 'react-feather';
 import { useRecoilState } from 'recoil';
-import { list } from '../../recoil/list';
-import ModalEditForm from '../../page/ModalEditForm';
+import { listState } from '../../recoil/listState';
+import ModalEditForm from './ModalEditForm';
 
 type Props = {
   item: {
@@ -15,7 +15,7 @@ type Props = {
 };
 
 const BoardItem = ({ item }: Props) => {
-  const [, setBoardList] = useRecoilState(list);
+  const [, setBoardList] = useRecoilState(listState);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 

@@ -13,8 +13,8 @@ type Props = {
 const Pagination = ({ totalItem, limit, page, setPage }: Props) => {
   const pageTotalNum = Math.ceil(totalItem / limit);
   const pageNum = new Array(pageTotalNum).fill(0);
-  const pageLimit = 5;
-  const pageOffset = Math.floor((page - 1) / pageLimit) * pageLimit;
+  const pageNumLimit = 5;
+  const pageNumOffset = Math.floor((page - 1) / pageNumLimit) * pageNumLimit;
 
   const clickPage = (index: number) => {
     setPage(index + 1);
@@ -47,7 +47,7 @@ const Pagination = ({ totalItem, limit, page, setPage }: Props) => {
                 {index + 1}
               </Button>
             ))
-            .slice(pageOffset, pageOffset + pageLimit)}
+            .slice(pageNumOffset, pageNumOffset + pageNumLimit)}
         {pageNum.length >= 1 && (
           <ArrowButton disabled={page === pageNum.length} onClick={clickNext}>
             <ChevronRight />
