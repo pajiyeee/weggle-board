@@ -4,15 +4,16 @@ import { Center } from '@chakra-ui/react';
 import { ChevronLeft, ChevronRight } from 'react-feather';
 
 type Props = {
-  totalItem: number;
+  totalItemNum: number;
   limit: number;
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
 };
 
-const Pagination = ({ totalItem, limit, page, setPage }: Props) => {
-  const pageTotalNum = Math.ceil(totalItem / limit);
-  const pageNum = new Array(pageTotalNum).fill(0);
+const Pagination = ({ totalItemNum, limit, page, setPage }: Props) => {
+  const pageTotalNum = Math.ceil(totalItemNum / limit);
+  const pageNumArray = new Array(pageTotalNum).fill(0).map((_, index) => index);
+
   const pageNumLimit = 5;
   const pageNumOffset = Math.floor((page - 1) / pageNumLimit) * pageNumLimit;
 
@@ -27,29 +28,27 @@ const Pagination = ({ totalItem, limit, page, setPage }: Props) => {
   const clickNext = () => {
     setPage(page + 1);
   };
-
+  console.log(page);
   return (
     <Center>
       <PaginationWrap>
-        {pageNum.length >= 1 && (
+        {pageNumArray.length >= 1 && (
           <ArrowButton disabled={page === 1} onClick={clickPrev}>
             <ChevronLeft />
           </ArrowButton>
         )}
-        {totalItem > 0 &&
-          pageNum
-            .map((_, index) => (
-              <Button
-                key={index}
-                colorSetting={index + 1 === page}
-                onClick={() => clickPage(index)}
-              >
-                {index + 1}
-              </Button>
-            ))
-            .slice(pageNumOffset, pageNumOffset + pageNumLimit)}
-        {pageNum.length >= 1 && (
-          <ArrowButton disabled={page === pageNum.length} onClick={clickNext}>
+        {totalItemNum > 0 &&
+          pageNumArray.slice(pageNumOffset, pageNumOffset + pageNumLimit).map((num, index) => (
+            <Button
+              key={num}
+              colorSetting={(page - 1) % pageNumLimit === index}
+              onClick={() => clickPage(num)}
+            >
+              {num + 1}
+            </Button>
+          ))}
+        {pageNumArray.length >= 1 && (
+          <ArrowButton disabled={page === pageNumArray.length} onClick={clickNext}>
             <ChevronRight />
           </ArrowButton>
         )}

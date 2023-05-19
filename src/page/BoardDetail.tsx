@@ -8,7 +8,7 @@ import { generateId } from '../utils/generateId';
 
 const BoardDetail = () => {
   const navigate = useNavigate();
-  const [boardList, setBoardList] = useRecoilState(listState);
+  const [, setBoardList] = useRecoilState(listState);
   const [titleInput, setTitleInput] = useState('');
   const [textInput, setTextInput] = useState('');
 

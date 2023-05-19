@@ -11,15 +11,20 @@ import SelectLimit from '../Components/BoardMain/SelectLimit';
 
 const BoardMain = () => {
   const navigate = useNavigate();
+
   const [boardList] = useRecoilState(listState);
-  const totalItem = boardList.length;
+  const totalItemNum = boardList.length;
+
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(totalItem);
+  const [limit, setLimit] = useState(totalItemNum);
   const offset = (page - 1) * limit;
+  const sliceBoardList =
+    limit === totalItemNum ? boardList : boardList.slice(offset, offset + limit);
 
   const goToDetail = () => {
     navigate('/detail');
   };
+
   return (
     <>
       <Center>
@@ -28,15 +33,13 @@ const BoardMain = () => {
             <Heading>게시판리스트</Heading>
             <WriteButton onClick={goToDetail}>글쓰기</WriteButton>
           </TitleWrap>
-          <SelectLimit totalItem={totalItem} setLimit={setLimit} />
+          <SelectLimit totalItemNum={totalItemNum} setLimit={setLimit} />
           <BoardListTitle />
-          {totalItem >= 1 && limit === totalItem
-            ? boardList.map((item) => <BoardItem key={item.id} item={item} />)
-            : boardList
-                .slice(offset, offset + limit)
-                .map((item) => <BoardItem key={item.id} item={item} />)}
-          {totalItem >= 1 && (
-            <Pagination totalItem={totalItem} limit={limit} page={page} setPage={setPage} />
+          {sliceBoardList.map((item) => (
+            <BoardItem key={item.id} item={item} />
+          ))}
+          {limit !== totalItemNum && totalItemNum >= 1 && (
+            <Pagination totalItemNum={totalItemNum} limit={limit} page={page} setPage={setPage} />
           )}
         </BoardMainWrap>
       </Center>
@@ -67,27 +70,3 @@ const WriteButton = styled.button`
   background-color: #222222;
   color: #ffffff;
 `;
-
-/*
-
-SelectLimit.tsx
-state 로 관리 
-
-
-const changeSelect = () => {
-  setSelect(e.target.value)
-}
-
-<select onChange={changeSelect}/>
- <option value="all" />
- <option value={5} />
-
----------------------------------------------------
- Main.tsx
-const [select, setSelect] = useRecoilState(select)
-
-const select === 'all' 
-slice 없이 map
-근데 'all' 을 어떻게 boardList.length라는 것을 명시해줄지....
-{all : boardList.length,five:5}
-*/
